@@ -1,37 +1,42 @@
-import { Link, Tabs } from 'expo-router'
-import { Button, useTheme } from 'tamagui'
-import { Atom, AudioWaveform } from '@tamagui/lucide-icons'
+import { Link, Tabs } from "expo-router";
+import { Button, getTokens, Text, useTheme } from "tamagui";
+import { Atom, AudioWaveform, Home } from "@tamagui/lucide-icons";
+import { SafeAreaView } from "react-native";
 
 export default function TabLayout() {
-  const theme = useTheme()
+  const theme = useTheme();
 
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: theme.red10.val,
+        tabBarActiveTintColor: theme.darkGray.val,
+        tabBarInactiveTintColor: theme.darkGray.val,
+        tabBarStyle: {
+          backgroundColor: theme.yellow.get(),
+          borderTopLeftRadius: 49,
+          borderTopRightRadius: 49,
+          paddingTop: 25,
+          height: "10%",
+          position: "absolute",
+        },
       }}
     >
       <Tabs.Screen
         name="index"
         options={{
-          title: 'Tab One',
-          tabBarIcon: ({ color }) => <Atom color={color} />,
-          headerRight: () => (
-            <Link href="/modal" asChild>
-              <Button mr="$4" bg="$purple8" color="$purple12">
-                Hello!
-              </Button>
-            </Link>
-          ),
+          headerShown: false,
+          tabBarIcon: ({ color }) => <Home color={color} size={32} />,
+          tabBarLabel: () => "",
         }}
       />
       <Tabs.Screen
-        name="two"
+        name="write"
         options={{
-          title: 'Tab Two',
+          headerShown: false,
+          tabBarLabel: () => "",
           tabBarIcon: ({ color }) => <AudioWaveform color={color} />,
         }}
       />
     </Tabs>
-  )
+  );
 }
